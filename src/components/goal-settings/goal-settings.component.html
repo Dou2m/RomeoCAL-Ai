@@ -1,0 +1,89 @@
+<div class="p-6 pt-10 space-y-8 animate-fade-in flex flex-col h-full">
+    <!-- Header -->
+    <header>
+        <h1 class="text-3xl font-bold text-white">Settings</h1>
+        <p class="text-gray-400">Personalize your goals and app appearance.</p>
+    </header>
+
+    <!-- Goal Inputs -->
+    <div class="space-y-6">
+        <h2 class="text-xl font-semibold text-white">Daily Goals</h2>
+        <!-- Calories -->
+        <div class="glass-card rounded-2xl p-4">
+            <label for="calories" class="block font-semibold mb-2" [style.color]="activeTheme().calories">Calories (kcal)</label>
+            <input 
+                id="calories" 
+                type="number"
+                [value]="calories()"
+                (input)="onCaloriesInput($event)"
+                class="w-full bg-transparent text-white text-2xl font-bold border-none focus:ring-0 p-0"
+                placeholder="2200">
+        </div>
+
+        <!-- Protein -->
+        <div class="glass-card rounded-2xl p-4">
+            <label for="protein" class="block font-semibold mb-2" [style.color]="activeTheme().protein">Protein (g)</label>
+            <input 
+                id="protein" 
+                type="number"
+                [value]="protein()"
+                (input)="onProteinInput($event)"
+                class="w-full bg-transparent text-white text-2xl font-bold border-none focus:ring-0 p-0"
+                placeholder="150">
+        </div>
+
+        <!-- Carbohydrates -->
+        <div class="glass-card rounded-2xl p-4">
+            <label for="carbs" class="block font-semibold mb-2" [style.color]="activeTheme().carbohydrates">Carbohydrates (g)</label>
+            <input 
+                id="carbs" 
+                type="number"
+                [value]="carbohydrates()"
+                (input)="onCarbsInput($event)"
+                class="w-full bg-transparent text-white text-2xl font-bold border-none focus:ring-0 p-0"
+                placeholder="250">
+        </div>
+
+        <!-- Fat -->
+        <div class="glass-card rounded-2xl p-4">
+            <label for="fat" class="block font-semibold mb-2" [style.color]="activeTheme().fat">Fat (g)</label>
+            <input 
+                id="fat" 
+                type="number"
+                [value]="fat()"
+                (input)="onFatInput($event)"
+                class="w-full bg-transparent text-white text-2xl font-bold border-none focus:ring-0 p-0"
+                placeholder="70">
+        </div>
+    </div>
+
+    <!-- Appearance Settings -->
+    <div class="space-y-4">
+        <h2 class="text-xl font-semibold text-white">Appearance</h2>
+        <div class="grid grid-cols-2 gap-4">
+            @for (theme of themes; track theme.key) {
+                <button (click)="onThemeSelected(theme)" class="glass-card rounded-2xl p-4 text-left transition-all" [class.border-2]="activeTheme().key === theme.key" [style.border-color]="activeTheme().key === theme.key ? theme.calories : 'transparent'">
+                    <p class="font-semibold text-white">{{ theme.name }}</p>
+                    <div class="flex space-x-2 mt-2">
+                        <div class="w-5 h-5 rounded-full" [style.background-color]="theme.calories"></div>
+                        <div class="w-5 h-5 rounded-full" [style.background-color]="theme.protein"></div>
+                        <div class="w-5 h-5 rounded-full" [style.background-color]="theme.carbohydrates"></div>
+                        <div class="w-5 h-5 rounded-full" [style.background-color]="theme.fat"></div>
+                    </div>
+                </button>
+            }
+        </div>
+    </div>
+
+
+    <!-- Action Buttons -->
+    <div class="flex-grow"></div>
+    <div class="flex gap-4">
+        <button (click)="onClose()" class="w-full py-3 rounded-xl glass-card font-semibold text-white transition-colors hover:bg-white/10">
+            Cancel
+        </button>
+        <button (click)="onSave()" class="w-full py-3 rounded-xl font-semibold text-white transition-opacity hover:opacity-90" [style.background-color]="activeTheme().calories">
+            Save Goals
+        </button>
+    </div>
+</div>

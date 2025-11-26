@@ -1,0 +1,30 @@
+
+<div class="h-full flex flex-col items-center justify-center p-4">
+    <div class="relative w-full max-w-md h-3/5 bg-black rounded-3xl border border-gray-700 flex flex-col items-center justify-center overflow-hidden">
+        <!-- Mock camera lens effect -->
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-48 h-48 rounded-full border-2 border-dashed border-gray-600 opacity-50"></div>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        
+        <div class="z-10 text-center text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <p class="mt-2 text-lg font-medium">Ready to Scan</p>
+            <p class="text-sm text-gray-400">Point your camera at your meal</p>
+        </div>
+    </div>
+    
+    <div class="mt-8">
+        <label class="relative w-20 h-20 flex items-center justify-center cursor-pointer group">
+            <input type="file" accept="image/*" class="sr-only" (change)="onFileSelected($event)">
+            <!-- Outer ring -->
+            <div class="absolute inset-0 glass-card rounded-full transition-transform duration-300 group-hover:scale-110"></div>
+            <!-- Inner ring -->
+            <div class="absolute inset-2 bg-sky-500 rounded-full transition-opacity duration-300 group-hover:opacity-80"></div>
+        </label>
+        <p class="mt-4 text-center text-gray-400">Tap to capture</p>
+    </div>
+</div>

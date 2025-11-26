@@ -1,0 +1,59 @@
+<div class="p-6 pt-10 space-y-8 animate-fade-in">
+    <!-- Header -->
+    <header>
+        <h1 class="text-3xl font-bold text-white">Daily Dashboard</h1>
+        <p class="text-gray-400">Your nutritional summary for today.</p>
+    </header>
+
+    <!-- Main Calories Widget -->
+    <div class="glass-card rounded-3xl p-6 flex items-center justify-between">
+        <div>
+            <p class="text-sm text-gray-400">Calories Consumed</p>
+            <p class="text-4xl font-bold text-white">
+                {{ totals().calories | number:'1.0-0' }}
+            </p>
+            <p class="text-gray-400">/ {{ goals().calories | number:'1.0-0' }} kcal</p>
+        </div>
+        <div class="relative w-24 h-24">
+            <svg class="w-full h-full" viewBox="0 0 36 36">
+                <path class="text-gray-700" stroke-width="3" fill="none" stroke="currentColor" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path [style.stroke]="theme().calories" stroke-width="3" fill="none" stroke-linecap="round" [attr.stroke-dasharray]="caloriesProgress() + ', 100'" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center text-xl font-semibold">
+                {{ caloriesProgress() | number:'1.0-0' }}%
+            </div>
+        </div>
+    </div>
+
+    <!-- Macronutrients Radar Chart -->
+    <div class="glass-card rounded-2xl p-4">
+        <h3 class="font-semibold text-white mb-2 text-center">Macronutrient Balance</h3>
+        <app-radar-chart [data]="macroData()" [goals]="macroGoals()" [colors]="macroColors()"></app-radar-chart>
+    </div>
+    
+    <!-- Daily Log List -->
+    <div>
+        <h2 class="text-xl font-bold mb-4">Today's Log</h2>
+        <div class="space-y-3 max-h-60 overflow-y-auto pr-2">
+            @if (dailyLog().length === 0) {
+                <div class="glass-card rounded-2xl p-4 text-center text-gray-400">
+                    <p>No meals logged yet. Tap the camera to scan your first meal!</p>
+                </div>
+            } @else {
+                @for(item of dailyLog(); track item.id) {
+                    <div class="glass-card rounded-2xl p-4 flex justify-between items-center">
+                        <div>
+                            <p class="font-semibold capitalize">{{ item.mealName }}</p>
+                            <p class="text-sm text-gray-400">{{ item.calories | number:'1.0-0' }} kcal</p>
+                        </div>
+                        <div class="flex space-x-4 text-sm font-medium">
+                            <span [style.color]="theme().protein">{{ item.protein | number:'1.0-0' }}p</span>
+                            <span [style.color]="theme().carbohydrates">{{ item.carbohydrates | number:'1.0-0' }}c</span>
+                            <span [style.color]="theme().fat">{{ item.fat | number:'1.0-0' }}f</span>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

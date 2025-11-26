@@ -1,0 +1,56 @@
+@if (adjustedResult(); as result) {
+    <div class="p-6 pt-10 space-y-6 animate-fade-in flex flex-col h-full">
+        <!-- Header -->
+        <header class="text-center">
+            <h1 class="text-3xl font-bold text-white capitalize">{{ result.mealName }}</h1>
+            <p [style.color]="theme().calories" class="font-semibold text-lg">{{ result.calories | number:'1.0-0' }} kcal</p>
+        </header>
+
+        <!-- Macronutrients Display -->
+        <div class="grid grid-cols-2 gap-4">
+            <div class="glass-card rounded-2xl p-4 text-center">
+                <p class="text-sm font-medium" [style.color]="theme().protein">Protein</p>
+                <p class="text-2xl font-bold">{{ result.protein | number:'1.0-1' }}g</p>
+            </div>
+             <div class="glass-card rounded-2xl p-4 text-center">
+                <p class="text-sm font-medium" [style.color]="theme().carbohydrates">Carbs</p>
+                <p class="text-2xl font-bold">{{ result.carbohydrates | number:'1.0-1' }}g</p>
+            </div>
+             <div class="glass-card rounded-2xl p-4 text-center">
+                <p class="text-sm font-medium" [style.color]="theme().fat">Fat</p>
+                <p class="text-2xl font-bold">{{ result.fat | number:'1.0-1' }}g</p>
+            </div>
+             <div class="glass-card rounded-2xl p-4 text-center">
+                <p class="text-sm font-medium" [style.color]="theme().sugar">Sugar</p>
+                <p class="text-2xl font-bold">{{ result.sugar | number:'1.0-1' }}g</p>
+            </div>
+        </div>
+
+        <!-- Portion Adjustment -->
+        <div class="glass-card rounded-2xl p-4 space-y-3">
+            <div class="flex justify-between items-baseline">
+                <label for="portion" class="font-semibold">Adjust Portion</label>
+                <span class="font-bold" [style.color]="theme().calories">{{ portionPercentage() }}%</span>
+            </div>
+            <input 
+                id="portion" 
+                type="range" 
+                min="10" 
+                max="200" 
+                step="5"
+                [value]="portionPercentage()"
+                (input)="onSliderChange($event)">
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex-grow"></div>
+        <div class="flex gap-4">
+            <button (click)="onDiscard()" class="w-full py-3 rounded-xl glass-card font-semibold text-white transition-colors hover:bg-white/10">
+                Discard
+            </button>
+            <button (click)="onLogFood()" class="w-full py-3 rounded-xl font-semibold text-white transition-opacity hover:opacity-90" [style.background-color]="theme().calories">
+                Add to Diary
+            </button>
+        </div>
+    </div>
+}

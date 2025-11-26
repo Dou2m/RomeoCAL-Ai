@@ -1,0 +1,7 @@
+{
+  "name": "AI Calorie Counter",
+  "description": "A smart, AI-powered calorie counter that uses Gemini to analyze your meals from a photo, providing a detailed nutritional breakdown with a luxurious, modern interface.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
